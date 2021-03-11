@@ -46,6 +46,7 @@ jobs:
       - name: Install
         run: |
           cd '${{ runner.workspace }}/b/ninja/'
+          cmake --install . --prefix out -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
           cpack -G WIX .
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
@@ -53,4 +54,3 @@ jobs:
           name: Build Dir
           path: |
             ${{ runner.workspace }}/b/ninja/
-            ${{ runner.workspace }}/b/vcpkg/installed/x64-windows/

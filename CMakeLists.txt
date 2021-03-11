@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.16)
 
 project(taglib-helper LANGUAGES CXX)
 cmake_policy(SET CMP0087 NEW)
+SET(X_VCPKG_APPLOCAL_DEPS_INSTALL ON)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
