@@ -33,3 +33,10 @@ Ogg::XiphComment *getXiphComment(File &file)
         return ((Ogg::Opus::File &)file).tag();
     return nullptr;
 }
+
+void test_local() {
+    auto ref = new FileRef("Z:\\test.xml", false);
+    if (ref->isNull())
+        std::cout << "Hello" << std::endl;
+    delete ref;
+}

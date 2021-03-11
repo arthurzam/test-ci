@@ -12,9 +12,6 @@ link_directories(${TAGLIB_LIBRARY_DIRS})
 add_definitions(-DTAGLIB_FULL_INCLUDE_PATH)
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
-message(">>>> Libs: ${TAGLIB_LIBRARIES}")
-message(">>>> include: ${TAGLIB_INCLUDE_DIRS}")
-
 set(PROJECT_SOURCES
         main.cpp
 )
