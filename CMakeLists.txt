@@ -25,4 +25,15 @@ target_link_libraries(taglib-helper PRIVATE ${TAGLIB_LIBRARIES})
 install(TARGETS taglib-helper DESTINATION bin)
 #x_vcpkg_install_local_dependencies(TARGETS taglib-helper DESTINATION bin)
 
+macro(install_target_deps target)
+        # Get target output name
+        get_target_property(TARGET_OUTPUT_NAME ${target} OUTPUT_NAME)
+        if (TARGET_OUTPUT_NAME STREQUAL "TARGET_OUTPUT_NAME-NOTFOUND")
+            # It means no custom output name was specified, so just use target name
+            set(TARGET_OUTPUT_NAME "${target}")
+        endif()
+        configure_file(${CMAKE_CONFIGS_PATH}/CopyDeps.bat.in ${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat @ONLY)
+        install(CODE "execute_process(COMMAND \${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat \${CMAKE_INSTALL_PREFIX} \${CMAKE_INSTALL_CONFIG_NAME})")
+ endmacro()
+install_target_deps(taglib-helper)
 include(CPack)

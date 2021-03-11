@@ -1,0 +1,14 @@
+@echo off
+SET _TARGET_DIR=%1
+SET _TARGET=@TARGET_OUTPUT_NAME@
+SET _CONFIG=%2
+
+if ("%_CONFIG%"=="Debug") (
+    SET _TARGET=@TARGET_OUTPUT_NAME@d
+    SET _VCPKG_ROOT=@VCPKG_INSTALL_ROOT@/debug/bin
+) else (
+    SET _VCPKG_ROOT=@VCPKG_INSTALL_ROOT@/bin
+)
+
+echo [install]: Copying deps for (%_TARGET%, %_CONFIG%)
+powershell -noprofile -executionpolicy Bypass -file "@VCPKG_APPLOCAL@" -targetBinary "%_TARGET_DIR%/%_CONFIG%/bin/%_TARGET%.dll" -installedDir "%_VCPKG_ROOT%" -OutVariable out
