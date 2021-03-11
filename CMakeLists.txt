@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(taglib-helper LANGUAGES CXX)
-
+cmake_policy(SET CMP0087 NEW)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
@@ -16,7 +16,7 @@ set(PROJECT_SOURCES
         main.cpp
 )
 
-add_library(${PROJECT_NAME} MODULE
+add_executable(${PROJECT_NAME}
     ${PROJECT_SOURCES}
 )
 

@@ -40,3 +40,9 @@ void test_local() {
         std::cout << "Hello" << std::endl;
     delete ref;
 }
+
+int main(int argc, char *argv[]) {
+	if (argc == 0)
+		test_local();
+	return 0;
+}
