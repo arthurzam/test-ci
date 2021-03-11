@@ -1,0 +1,42 @@
+name: trying
+on: [push, pull_request]
+
+jobs:
+  job:
+    name: ${{ matrix.os }}-hosted-basic
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest]
+        include:
+          - os: windows-latest
+            triplet: x64-windows
+            vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
+            vcpkgPackages: 'taglib'
+
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          submodules: true
+
+      - uses: lukka/get-cmake@latest
+      - name: Restore artifacts, or run vcpkg, build and cache artifacts
+        uses: lukka/run-vcpkg@main
+        id: runvcpkg
+        with:
+          vcpkgArguments: '${{ matrix.vcpkgPackages }}'
+          vcpkgTriplet: '${{ matrix.triplet }}'
+          vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
+          vcpkgGitCommitId: '${{ matrix.vcpkgCommitId }}'
+      - name: Prints outputs of run-vcpkg task
+        run: echo "'${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}' '${{  steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
+      - name: Run CMake+Ninja with triplet (cmd)
+        uses: lukka/run-cmake@main
+        id: runcmake_cmd
+        with:
+          cmakeGenerator: 'Ninja'
+          useVcpkgToolchainFile: true
+          buildWithCMakeArgs: '-- -v'
+          vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
+          buildDirectory: '${{ runner.workspace }}/b/ninja/'
