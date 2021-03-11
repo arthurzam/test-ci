@@ -26,8 +26,8 @@ install(TARGETS taglib-helper DESTINATION bin)
 #x_vcpkg_install_local_dependencies(TARGETS taglib-helper DESTINATION bin)
 
 add_custom_target(InstallDLLs
-      COMMAND powershell -noprofile -executionpolicy Bypass -file ${_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1
-      -targetBinary ${CMAKE_INSTALL_PREFIX}/yourapphere.exe
+      COMMAND powershell -noprofile -executionpolicy Bypass -file ${Z_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1
+      -targetBinary ${CMAKE_INSTALL_PREFIX}/bin/taglib-helper.exe
       -installedDir "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<$<CONFIG:Debug>:/debug>/bin"
       -OutVariable out
   )
