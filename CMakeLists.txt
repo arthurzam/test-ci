@@ -12,6 +12,9 @@ link_directories(${TAGLIB_LIBRARY_DIRS})
 add_definitions(-DTAGLIB_FULL_INCLUDE_PATH)
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
+message(">>>> Libs: ${TAGLIB_LIBRARIES}")
+message(">>>> include: ${TAGLIB_INCLUDE_DIRS}")
+
 set(PROJECT_SOURCES
         main.cpp
 )
@@ -20,20 +23,6 @@ add_library(${PROJECT_NAME} MODULE
     ${PROJECT_SOURCES}
 )
 
-target_link_libraries(taglib-helper PRIVATE ${TAGLIB_LIBRARIES} Qt5::Widgets)
-install(TARGETS taglib-helper DESTINATION bin/modules)
-install(CODE [[
-    #set(CMAKE_GET_RUNTIME_DEPENDENCIES_TOOL objdump)
-  file(GET_RUNTIME_DEPENDENCIES
-    MODULES $<TARGET_FILE:taglib-helper>
-    RESOLVED_DEPENDENCIES_VAR found_deps
-    UNRESOLVED_DEPENDENCIES_VAR unfound_deps
-  )
-message("########")
-message(${found_deps})
-message("########")
-message(${unfound_deps})
-message("########")
-]])
-
-#windeployqt(taglib-helper)
+target_link_libraries(taglib-helper PRIVATE ${TAGLIB_LIBRARIES})
+install(TARGETS taglib-helper DESTINATION bin)
+x_vcpkg_install_local_dependencies(taglib-helper)

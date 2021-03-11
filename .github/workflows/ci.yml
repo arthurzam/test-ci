@@ -40,3 +40,5 @@ jobs:
           buildWithCMakeArgs: '-- -v'
           vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
           buildDirectory: '${{ runner.workspace }}/b/ninja/'
+      - name: Install
+        run: cmake --install . --prefix '${{ runner.workspace }}/out'
