@@ -25,18 +25,14 @@ target_link_libraries(taglib-helper PRIVATE ${TAGLIB_LIBRARIES})
 install(TARGETS taglib-helper DESTINATION bin)
 #x_vcpkg_install_local_dependencies(TARGETS taglib-helper DESTINATION bin)
 
-set(VCPKG_APPLOCAL "${Z_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1")
-set(VCPKG_INSTALL_ROOT "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}")
-
-macro(install_target_deps target)
-        # Get target output name
-        get_target_property(TARGET_OUTPUT_NAME ${target} OUTPUT_NAME)
-        if (TARGET_OUTPUT_NAME STREQUAL "TARGET_OUTPUT_NAME-NOTFOUND")
-            # It means no custom output name was specified, so just use target name
-            set(TARGET_OUTPUT_NAME "${target}")
-        endif()
-        configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CopyDeps.bat.in ${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat @ONLY)
-        install(CODE "execute_process(COMMAND \${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat \${CMAKE_INSTALL_PREFIX} \${CMAKE_INSTALL_CONFIG_NAME})")
- endmacro()
-install_target_deps(taglib-helper)
+add_custom_target(InstallDLLs
+      COMMAND powershell -noprofile -executionpolicy Bypass -file ${_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1
+      -targetBinary ${CMAKE_INSTALL_PREFIX}/yourapphere.exe
+      -installedDir "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<$<CONFIG:Debug>:/debug>/bin"
+      -OutVariable out
+  )
+  set_target_properties(InstallDLLs PROPERTIES EXCLUDE_FROM_ALL TRUE)
+  # runs this target after installation
+  install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build . --target InstallDLLs --config RELEASE)")
+  
 include(CPack)
