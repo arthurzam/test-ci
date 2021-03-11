@@ -48,3 +48,8 @@ jobs:
           cd '${{ runner.workspace }}/b/ninja/'
           cmake --install . --prefix 'out'
           cpack -G WIX .
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        with:
+          name: Build Dir
+          path: '${{ runner.workspace }}/b/ninja/'
