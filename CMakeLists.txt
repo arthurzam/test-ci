@@ -25,6 +25,9 @@ target_link_libraries(taglib-helper PRIVATE ${TAGLIB_LIBRARIES})
 install(TARGETS taglib-helper DESTINATION bin)
 #x_vcpkg_install_local_dependencies(TARGETS taglib-helper DESTINATION bin)
 
+set(VCPKG_APPLOCAL "${Z_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1")
+set(VCPKG_INSTALL_ROOT "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}")
+
 macro(install_target_deps target)
         # Get target output name
         get_target_property(TARGET_OUTPUT_NAME ${target} OUTPUT_NAME)
