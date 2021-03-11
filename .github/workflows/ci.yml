@@ -43,4 +43,4 @@ jobs:
           vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
           buildDirectory: '${{ runner.workspace }}/b/ninja/'
       - name: Install
-        run: cpack -G WIX '${{ runner.workspace }}/b/ninja/'
+        run: cmake --install '${{ runner.workspace }}/b/ninja/' --prefix '${{ runner.workspace }}/out' #cpack -G WIX '${{ runner.workspace }}/b/ninja/'
