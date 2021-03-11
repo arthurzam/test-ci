@@ -40,7 +40,11 @@ jobs:
           cmakeGenerator: 'Ninja'
           useVcpkgToolchainFile: true
           buildWithCMakeArgs: '-- -v'
+          cmakeAppendedArgs: -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
           vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
           buildDirectory: '${{ runner.workspace }}/b/ninja/'
       - name: Install
-        run: cmake --install '${{ runner.workspace }}/b/ninja/' --prefix '${{ runner.workspace }}/out' #cpack -G WIX '${{ runner.workspace }}/b/ninja/'
+        run: |
+          cd '${{ runner.workspace }}/b/ninja/'
+          cmake --install . --prefix 'out'
+          cpack -G WIX .
