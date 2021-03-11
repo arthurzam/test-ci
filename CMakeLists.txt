@@ -23,3 +23,5 @@ add_library(${PROJECT_NAME} MODULE
 target_link_libraries(taglib-helper PRIVATE ${TAGLIB_LIBRARIES})
 install(TARGETS taglib-helper DESTINATION bin)
 x_vcpkg_install_local_dependencies(taglib-helper)
+
+INCLUDE(CPack)
