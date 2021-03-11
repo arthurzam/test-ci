@@ -32,7 +32,7 @@ macro(install_target_deps target)
             # It means no custom output name was specified, so just use target name
             set(TARGET_OUTPUT_NAME "${target}")
         endif()
-        configure_file(${CMAKE_CONFIGS_PATH}/CopyDeps.bat.in ${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat @ONLY)
+        configure_file(${CMAKE_CURRENT_SOURCE_DIR}/CopyDeps.bat.in ${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat @ONLY)
         install(CODE "execute_process(COMMAND \${CMAKE_BINARY_DIR}/CopyDeps_${TARGET_OUTPUT_NAME}.bat \${CMAKE_INSTALL_PREFIX} \${CMAKE_INSTALL_CONFIG_NAME})")
  endmacro()
 install_target_deps(taglib-helper)

@@ -46,7 +46,7 @@ jobs:
       - name: Install
         run: |
           cd '${{ runner.workspace }}/b/ninja/'
-          cmake --install . --prefix out -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
+          cmake --install . --prefix out
           cpack -G WIX .
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
