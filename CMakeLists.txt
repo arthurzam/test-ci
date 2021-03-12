@@ -36,7 +36,7 @@ install(TARGETS taglib-helper DESTINATION bin)
 #  install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build . --target InstallDLLs --config RELEASE)")
 message(">>>> Path: $ENV{PATH}")
 message(">>>> MSVCIDE: ${CMAKE_MSVCIDE_RUN_PATH}")
-cmake_path(SET MyPath "$ENV{PATH}")
+file(TO_CMAKE_PATH "$ENV{PATH}" MyPath)
 install (CODE "
 	set(ENV{PATH} \"MyPath\")
 	execute_process(COMMAND \"${Z_VCPKG_POWERSHELL_PATH}\" -noprofile -executionpolicy Bypass -file ${Z_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1
