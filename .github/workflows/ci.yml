@@ -40,7 +40,7 @@ jobs:
           cmakeGenerator: 'Ninja'
           useVcpkgToolchainFile: true
           buildWithCMakeArgs: '-- -v'
-          cmakeAppendedArgs: -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
+          cmakeAppendedArgs: -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON -DCMAKE_INSTALL_PREFIX='${{ runner.workspace }}/b/out_custom'
           vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
           buildDirectory: '${{ runner.workspace }}/b/ninja/'
       - name: Install
@@ -54,4 +54,3 @@ jobs:
           name: Build Dir
           path: |
             ${{ runner.workspace }}/b/ninja/
-            C:/Program Files (x86)/taglib-helper
