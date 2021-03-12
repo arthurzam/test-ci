@@ -6,11 +6,11 @@
 
 if(NOT WIN32)
     if (TagLib_FIND_REQUIRED)
-        pkg_check_modules(TAGLIB taglib REQUIRED)
+        pkg_check_modules(TAGLIB taglib REQUIRED IMPORTED_TARGET)
     elseif(TagLib_FIND_QUIETLY)
-        pkg_check_modules(TAGLIB taglib QUIET)
+        pkg_check_modules(TAGLIB taglib QUIET IMPORTED_TARGET)
     else()
-        pkg_check_modules(TAGLIB taglib)
+        pkg_check_modules(TAGLIB taglib IMPORTED_TARGET)
     endif()
 else()
     find_path(TAGLIB_INCLUDE_DIR taglib/taglib.h PATH_SUFFIXES taglib)
@@ -26,4 +26,11 @@ else()
 
     set(TAGLIB_INCLUDE_DIRS ${TAGLIB_INCLUDE_DIR})
     set(TAGLIB_LIBRARIES ${TAGLIB_LIBRARY})
+	
+	if (NOT TARGET PkgConfig::TAGLIB)
+		add_library(PkgConfig::TAGLIB UNKNOWN IMPORTED)
+		set_target_properties(ZLIB::ZLIB PROPERTIES
+                              IMPORTED_LOCATION "${TAGLIB_LIBRARY}"
+							  INTERFACE_INCLUDE_DIRECTORIES "${TAGLIB_INCLUDE_DIR}")
+	endif ()
 endif()

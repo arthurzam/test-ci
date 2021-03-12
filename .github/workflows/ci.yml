@@ -10,7 +10,7 @@ jobs:
       matrix:
         os: [windows-latest]
         include:
-          - os: windows-latest
+          - os: windows-latest-static
             triplet: x64-windows
             vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
             vcpkgPackages: 'taglib libpng'
@@ -41,7 +41,7 @@ jobs:
           cmakeBuildType: 'Release'
           useVcpkgToolchainFile: true
           buildWithCMakeArgs: '-- -v'
-          cmakeAppendedArgs: -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
+          #cmakeAppendedArgs: -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
           vcpkgTriplet: ${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}
           buildDirectory: '${{ runner.workspace }}/b/ninja/'
       - name: Install
@@ -51,7 +51,8 @@ jobs:
           cpack -G WIX .
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
+        if: always()
         with:
           name: Build Dir
           path: |
-            ${{ runner.workspace }}/b/ninja/
+            ${{ runner.workspace }}/b/
