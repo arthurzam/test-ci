@@ -54,3 +54,4 @@ jobs:
           name: Build Dir
           path: |
             ${{ runner.workspace }}/b/ninja/
+            C:/Program Files (x86)/taglib-helper
