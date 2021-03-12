@@ -7,7 +7,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
 
 file(TO_CMAKE_PATH "$ENV{PATH}" MyPath)
-install (CODE "set(ENV{PATH} \"${MyPath}\")
+install (CODE "set(ENV{PATH} \"${MyPath}\")" )
 
 
 find_package(TAGLIB REQUIRED)
