@@ -6,7 +6,6 @@
  *
  */
 
-#include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -22,7 +21,7 @@ void abort_(const char * s, ...)
         vfprintf(stderr, s, args);
         fprintf(stderr, "\n");
         va_end(args);
-        abort();
+        exit(1);
 }
 
 int x, y;
@@ -59,8 +58,8 @@ void read_png_file(char* file_name)
         if (!info_ptr)
                 abort_("[read_png_file] png_create_info_struct failed");
 
-        if (setjmp(png_jmpbuf(png_ptr)))
-                abort_("[read_png_file] Error during init_io");
+        //if (setjmp(png_jmpbuf(png_ptr)))
+        //        abort_("[read_png_file] Error during init_io");
 
         png_init_io(png_ptr, fp);
         png_set_sig_bytes(png_ptr, 8);
@@ -77,8 +76,8 @@ void read_png_file(char* file_name)
 
 
         /* read file */
-        if (setjmp(png_jmpbuf(png_ptr)))
-                abort_("[read_png_file] Error during read_image");
+        //if (setjmp(png_jmpbuf(png_ptr)))
+        //        abort_("[read_png_file] Error during read_image");
 
         row_pointers = (png_bytep*) malloc(sizeof(png_bytep) * height);
         for (y=0; y<height; y++)

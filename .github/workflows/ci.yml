@@ -38,6 +38,7 @@ jobs:
         id: runcmake_cmd
         with:
           cmakeGenerator: 'Ninja'
+          cmakeBuildType: 'Release'
           useVcpkgToolchainFile: true
           buildWithCMakeArgs: '-- -v'
           cmakeAppendedArgs: -DX_VCPKG_APPLOCAL_DEPS_INSTALL=ON
