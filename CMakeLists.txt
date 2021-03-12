@@ -35,11 +35,11 @@ install(TARGETS taglib-helper DESTINATION bin)
   # runs this target after installation
 #  install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build . --target InstallDLLs --config RELEASE)")
 
-install (CODE [[
+install (CODE "
 	execute_process(COMMAND powershell -noprofile -executionpolicy Bypass -file ${Z_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1
 					-targetBinary \${CMAKE_INSTALL_PREFIX}/bin/taglib-helper.exe
-					-installedDir "${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<$<CONFIG:Debug>:/debug>/bin"
+                                        -installedDir \"${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<$<CONFIG:Debug>:/debug>/bin\"
 					-OutVariable out)
-]])
+")
   
 include(CPack)
