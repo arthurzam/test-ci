@@ -36,6 +36,7 @@ install(TARGETS taglib-helper DESTINATION bin)
 #  install(CODE "execute_process(COMMAND \"${CMAKE_COMMAND}\" --build . --target InstallDLLs --config RELEASE)")
 message(">>>> Path: $ENV{PATH}")
 install (CODE "
+	set(ENV{PATH} \"$ENV{PATH}\")
 	execute_process(COMMAND \"${Z_VCPKG_POWERSHELL_PATH}\" -noprofile -executionpolicy Bypass -file ${Z_VCPKG_TOOLCHAIN_DIR}/msbuild/applocal.ps1
 					-targetBinary \${CMAKE_INSTALL_PREFIX}/bin/taglib-helper.exe
                     -installedDir \"${_VCPKG_INSTALLED_DIR}/${VCPKG_TARGET_TRIPLET}$<$<CONFIG:Debug>:/debug>/bin\"
