@@ -55,4 +55,5 @@ jobs:
         with:
           name: Build Dir
           path: |
-            ${{ runner.workspace }}/b/
+            ${{ runner.workspace }}/b/ninja/
+            ${{ runner.workspace }}/b/vcpkg/installed/

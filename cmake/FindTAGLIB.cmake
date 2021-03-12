@@ -29,7 +29,7 @@ else()
 	
 	if (NOT TARGET PkgConfig::TAGLIB)
 		add_library(PkgConfig::TAGLIB UNKNOWN IMPORTED)
-		set_target_properties(ZLIB::ZLIB PROPERTIES
+		set_target_properties(PkgConfig::TAGLIB PROPERTIES
                               IMPORTED_LOCATION "${TAGLIB_LIBRARY}"
 							  INTERFACE_INCLUDE_DIRECTORIES "${TAGLIB_INCLUDE_DIR}")
 	endif ()
