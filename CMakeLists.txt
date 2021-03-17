@@ -10,7 +10,7 @@ install (CODE "set(ENV{PATH} \"${MyPath}\")" )
 
 
 find_package(TAGLIB REQUIRED)
-add_definitions(-DTAGLIB_FULL_INCLUDE_PATH)
+add_definitions(-DTAGLIB_FULL_INCLUDE_PATH -DTAGLIB_STATIC)
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
 set(PROJECT_SOURCES

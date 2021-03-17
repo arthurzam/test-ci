@@ -10,10 +10,10 @@ jobs:
       matrix:
         os: [windows-latest]
         include:
-          - os: windows-latest
+          - os: windows-latest-static
             triplet: x64-windows
             vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
-            vcpkgPackages: 'taglib libpng:x64-windows-static'
+            vcpkgPackages: 'taglib libpng'
 
     steps:
       - uses: actions/checkout@v1
