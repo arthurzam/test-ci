@@ -3,15 +3,13 @@ on: [push, pull_request]
 
 jobs:
   job:
-    name: ${{ matrix.os }}-hosted-basic
-    runs-on: ${{ matrix.os }}
+    name: Basic
+    runs-on: windows-latest
     strategy:
       fail-fast: false
       matrix:
-        os: [windows-latest]
         include:
-          - os: windows-latest-static
-            triplet: x64-windows
+          - triplet: x64-windows-static
             vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
             vcpkgPackages: 'taglib libpng'
 
