@@ -13,22 +13,22 @@ find_package(TAGLIB REQUIRED)
 add_definitions(-DTAGLIB_FULL_INCLUDE_PATH -DTAGLIB_STATIC)
 set(CMAKE_SHARED_MODULE_PREFIX "")
 
-set(PROJECT_SOURCES
-        main.cpp
+add_executable(taglib-helper
+    "main.cpp"
 )
-
-add_executable(${PROJECT_NAME}
-    ${PROJECT_SOURCES}
-)
-
 target_link_libraries(taglib-helper PRIVATE PkgConfig::TAGLIB)
+set_property(TARGET taglib-helper PROPERTY
+  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 install(TARGETS taglib-helper DESTINATION bin)
+
 
 find_package(PNG REQUIRED)
 add_executable(magic-png
     "png.c"
 )
 target_link_libraries(magic-png PRIVATE PNG::PNG)
+set_property(TARGET magic-png PROPERTY
+  MSVC_RUNTIME_LIBRARY "MultiThreaded$<$<CONFIG:Debug>:Debug>")
 install(TARGETS magic-png DESTINATION bin/modules)
 
 install (CODE "

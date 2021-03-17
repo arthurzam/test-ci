@@ -3,7 +3,7 @@ on: [push, pull_request]
 
 jobs:
   job:
-    name: Basic
+    name: Basic (${{ matrix.triplet }})
     runs-on: windows-latest
     strategy:
       fail-fast: false
