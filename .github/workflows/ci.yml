@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - triplet: x64-windows-static
+          - triplet: x64-mingw-static
             vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
             vcpkgPackages: 'taglib libpng'
 
