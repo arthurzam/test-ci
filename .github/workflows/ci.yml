@@ -9,9 +9,9 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - triplet: x64-mingw-static
-            vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
-            vcpkgPackages: 'taglib libpng'
+          - triplet: x64-windows
+            vcpkgCommitId: '030cfaa24de9ea1bbf0a4d9c615ce7312ba77af1'
+            vcpkgPackages: 'taglib libpng ffmpeg[ffmpeg,iconv,vorbis,openssl,mp3lame,swresample,swscale,bzip2,zlib] qt5[core,quickcontrols2,extras]'
 
     steps:
       - uses: actions/checkout@v1
@@ -27,10 +27,16 @@ jobs:
           vcpkgTriplet: '${{ matrix.triplet }}'
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
           vcpkgGitCommitId: '${{ matrix.vcpkgCommitId }}'
-          
-      - name: Prints outputs of run-vcpkg task
-        run: echo "'${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}' '${{  steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
-        
+      - name: vcpkg export
+        run: |
+          '${{ runner.workspace }}/b/vcpkg/vcpkg.exe' export '${{ matrix.vcpkgPackages }}' --7zip
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v2
+        if: always()
+        with:
+          name: vcpkg-export
+          path: |
+            ${{ runner.workspace }}/b/vcpkg/vcpkg-export-*
       - name: Run CMake+Ninja with triplet (cmd)
         uses: lukka/run-cmake@main
         id: runcmake_cmd
