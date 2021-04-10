@@ -27,16 +27,21 @@ jobs:
           vcpkgTriplet: '${{ matrix.triplet }}'
           vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
           vcpkgGitCommitId: '${{ matrix.vcpkgCommitId }}'
-      - name: vcpkg export
+          
+      - name: Export outputs of run-vcpkg task
         run: |
-          '${{ runner.workspace }}/b/vcpkg/vcpkg.exe' export '${{ matrix.vcpkgPackages }}' --7zip
-      - name: Archive code coverage results
+          ${{ runner.workspace }}/b/vcpkg/vcpkg.exe export --triplet=${{ matrix.triplet }} --7zip ${{ matrix.vcpkgPackages }}
+          dir ${{ runner.workspace }}/b/vcpkg/vcpkg-export-*
+          
+      - name: Upload Export
         uses: actions/upload-artifact@v2
         if: always()
         with:
           name: vcpkg-export
           path: |
             ${{ runner.workspace }}/b/vcpkg/vcpkg-export-*
+            
+            
       - name: Run CMake+Ninja with triplet (cmd)
         uses: lukka/run-cmake@main
         id: runcmake_cmd
@@ -55,7 +60,6 @@ jobs:
           cpack -G WIX .
       - name: Archive code coverage results
         uses: actions/upload-artifact@v2
-        if: always()
         with:
           name: Build Dir
           path: |
