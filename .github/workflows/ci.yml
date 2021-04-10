@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - triplet: x64-mingw-static
+          - triplet: x64-windows
             vcpkgCommitId: '801084007159e0b1b4c95134e754d876e688ebed'
             vcpkgPackages: 'taglib libpng'
 
@@ -29,7 +29,9 @@ jobs:
           vcpkgGitCommitId: '${{ matrix.vcpkgCommitId }}'
           
       - name: Prints outputs of run-vcpkg task
-        run: echo "'${{ steps.runvcpkg.outputs.RUNVCPKG_VCPKG_ROOT_OUT }}' '${{  steps.runvcpkg.outputs.RUNVCPKG_VCPKG_TRIPLET_OUT }}' "
+        run: |
+          ${{ runner.workspace }}/b/vcpkg/vcpkg.exe export --triplet=${{ matrix.triplet }} --7zip taglib
+          dir ${{ runner.workspace }}/b/vcpkg/
         
       - name: Run CMake+Ninja with triplet (cmd)
         uses: lukka/run-cmake@main
