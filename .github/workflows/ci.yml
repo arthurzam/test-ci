@@ -10,7 +10,7 @@ jobs:
       matrix:
         include:
           - triplet: x64-windows
-            vcpkgCommitId: '030cfaa24de9ea1bbf0a4d9c615ce7312ba77af1'
+            vcpkgCommitId: 'fe112d8301e13fde9a25dc92d94a0c4a6dc3cf19'
             vcpkgPackages: 'taglib libpng ffmpeg[ffmpeg,iconv,vorbis,openssl,mp3lame,swresample,swscale,bzip2,zlib] qt5[core,quickcontrols2,extras]'
 
     steps:
