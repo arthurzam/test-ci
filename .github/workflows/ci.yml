@@ -13,8 +13,10 @@ jobs:
     - name: Download schema
       run: wget https://gitweb.gentoo.org/data/xml-schema.git/tree/repositories.xsd
 
-    - name: Lint repositories.xml
+    - name: Prepare xmllint annotator
       uses: korelstar/xmllint-problem-matcher@v1
+
+    - name: Lint repositories.xml
       uses: ChristophWurst/xmllint-action@v1
       with:
         xml-file: ./files/overlays/repositories.xml
