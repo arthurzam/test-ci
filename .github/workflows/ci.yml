@@ -1,8 +1,7 @@
 name: repositories
 on:
   push
-    branches:
-      - '*'
+
 jobs:
   validate-schema:
     runs-on: ubuntu-latest
