@@ -11,7 +11,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Download schema
-      run: wget https://gitweb.gentoo.org/data/xml-schema.git/tree/repositories.xsd
+      run: wget https://gitweb.gentoo.org/data/xml-schema.git/plain/repositories.xsd
 
     - name: Prepare xmllint annotator
       uses: korelstar/xmllint-problem-matcher@v1
