@@ -59,7 +59,7 @@
   FIN
   -->
   <repo quality="experimental" status="unofficial">
-    <name2>2xsaiko</name>
+    <name>2xsaiko</name>
     <description lang="en">Personal overlay with no special focus</description>
     <homepage>https://git.sr.ht/~dblsaiko/ebuilds</homepage>
     <owner type="person">
