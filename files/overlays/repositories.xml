@@ -71,6 +71,18 @@
     <feed>https://git.sr.ht/~dblsaiko/ebuilds/log/rss.xml</feed>
   </repo>
   <repo quality="experimental" status="unofficial">
+    <name>4nykey</name>
+    <description lang="en">An experimental portage overlay</description>
+    <homepage>https://github.com/4nykey/4nykey</homepage>
+    <owner type="person">
+      <email>4nykey@gmail.com</email>
+      <name>Aleksei Kaveshnikov</name>
+    </owner>
+    <source type="git">https://github.com/4nykey/4nykey.git</source>
+    <source type="git">git@github.com:4nykey/4nykey.git</source>
+    <feed>https://github.com/4nykey/4nykey/commits/master.atom</feed>
+  </repo>
+  <repo quality="experimental" status="unofficial">
     <name>3nykey</name>
     <description lang="en">An experimental portage overlay</description>
     <homepage>https://github.com/4nykey/4nykey</homepage>
@@ -79,18 +91,6 @@
       <name>Aleksei Kaveshnikov</name>
     </owner>
     <source type="git">https://github.com/4nykey/4nykey.git</source>
-    <source type="git">git@github.com:4nykey/4nykey.git</source>
-    <feed>https://github.com/4nykey/4nykey/commits/master.atom</feed>
-  </repo>
-  <repo quality="experimental" status="unofficial">
-    <name>4nykey</name>
-    <description lang="en">An experimental portage overlay</description>
-    <homepage>https://github.com/4nykey/4nykey</homepage>
-    <owner type="person">
-      <email>4nykey@gmail.com</email>
-      <name>Aleksei Kaveshnikov</name>
-    </owner>
-    <source type="git2">https://github.com/4nykey/4nykey.git</source>
     <source type="git">git@github.com:4nykey/4nykey.git</source>
     <feed>https://github.com/4nykey/4nykey/commits/master.atom</feed>
   </repo>

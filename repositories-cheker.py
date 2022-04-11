@@ -33,7 +33,7 @@ def output_xml_error(xml: etree._Element, title: str, content: str):
     print(f'::error file={sys.argv[2]},line={start},endLine={end},title={title}::{content}')
 
     global ok_flag
-    ok_flag = True
+    ok_flag = False
 
 
 def output_xml_warning(xml: etree._Element, title: str, content: str):
